@@ -6,13 +6,9 @@ DownloadQueue::DownloadQueue(QWidget *parent) :
     ui(new Ui::DownloadQueue)
 {
     ui->setupUi(this);
+    ui->tableWidget->setColumnCount(3);
+    ui->tableWidget->setRowCount(60);
 
-    model = new QStringListModel();
-
-    list <<"audio"<<"vksaver"<<"add"<<"set";
-
-    model->setStringList(list);
-    ui->listView->setModel(model);
 }
 
 DownloadQueue::~DownloadQueue()

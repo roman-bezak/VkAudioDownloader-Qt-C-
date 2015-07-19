@@ -3,8 +3,10 @@
 
 QByteArray Downloader::Do_Download(QString url)
 {
-    QNetworkAccessManager* manager = new QNetworkAccessManager();//создаем объект класса для работы с http
+    manager = new QNetworkAccessManager();//создаем объект класса для работы с http
     QNetworkReply* reply = manager->get(QNetworkRequest(QUrl(url)));//выполняем гет запрос и записываем ответ
+
+
 
     QEventLoop eventLoop;
 
@@ -15,7 +17,9 @@ QByteArray Downloader::Do_Download(QString url)
     eventLoop.exec();
 
     QByteArray answer = reply->readAll();
+
     reply->deleteLater();
+    //delete manager;
 
     return answer;
 }

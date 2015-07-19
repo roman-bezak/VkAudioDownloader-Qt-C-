@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QSignalMapper>
 #include <QDebug>
+#include "ui_audiomanager.h"
 #include "downloader.h"
 #include "ui_downloadqueue.h"
 
@@ -80,8 +81,6 @@ void AudioManager::CellButtonClicked(int RowNum)
 {
     qDebug() << "START_DOWNLOAD";
 
-    downloadqueue->list.push_back(audioList[RowNum].getTitle());
-    downloadqueue->model->setStringList(downloadqueue->list);
 
     connect(downloader,SIGNAL(progressDownloader(qint64,qint64)),this,SLOT(updateBar(qint64,qint64)));
 
@@ -91,8 +90,7 @@ void AudioManager::CellButtonClicked(int RowNum)
 
     qDebug() << "EndDownloadAndSaveFile: "+audioList[RowNum].getTitle()+"\n\n";
 
-    downloadqueue->list.pop_back();
-    downloadqueue->model->setStringList(downloadqueue->list);
+
 }
 
 void AudioManager::updateBar(qint64 current, qint64 total)

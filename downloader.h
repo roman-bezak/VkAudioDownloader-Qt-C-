@@ -18,6 +18,8 @@ class Downloader:public QObject
     public:
 
         explicit Downloader(QObject* parent = 0 ) : QObject(parent){}
+
+        QNetworkAccessManager* manager;
         QByteArray Do_Download(QString url);
         void saveFile(QString filename,QByteArray content);
 

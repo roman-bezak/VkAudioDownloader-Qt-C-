@@ -17,8 +17,6 @@ public:
     explicit DownloadQueue(QWidget *parent = 0);
     ~DownloadQueue();
 
-    QStringList list;
-    QStringListModel *model;
     Ui::DownloadQueue *ui;
 };
 

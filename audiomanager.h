@@ -41,8 +41,11 @@ class AudioManager:public QMainWindow
 
         DownloadQueue *downloadqueue;
         Downloader *downloader;
+
         void setAudioCount(int count){audioCount = count;}
         int getAudioCount(){return audioCount;}
+
+
         void showTraksInfo()
         {
             for(int i = 0;i<audioList.size();i++)

@@ -65,7 +65,7 @@ class AudioManager:public QMainWindow
 
 public slots:
 
-        void CellButtonClicked(int RowNum);
+        void audioRowButtonClicked(int RowNum);
         void updateBar(qint64,qint64);
 
 };

@@ -44,7 +44,7 @@ AudioManager::AudioManager(QWidget *parent):
 
 //    //ui->tableWidget->setStyleSheet("QTableView {selection-background-color: red;}");
 
-//    ui->tableWidget->setItem(0, 1, new QTableWidgetItem("Hello"));
+   // ui->tableWidget->setIsetItem(0, 1, new QTableWidgetItem("Hello"));
 
 
 }
@@ -72,13 +72,17 @@ void AudioManager::initTable()
         ui->tableWidget->setCellWidget(i,4,pButton);
     }
 
-    connect(mapper, SIGNAL(mapped(int)), this, SLOT(CellButtonClicked(int)));
+    connect(mapper, SIGNAL(mapped(int)), this, SLOT(audioRowButtonClicked(int)));
 
 
 }
 
-void AudioManager::CellButtonClicked(int RowNum)
+void AudioManager::audioRowButtonClicked(int RowNum)
 {
+
+    downloadqueue->insertAudioRowForDownload(audioList[RowNum].getArtist(),
+                                             audioList[RowNum].getTitle());
+
     qDebug() << "START_DOWNLOAD";
 
 
@@ -95,6 +99,6 @@ void AudioManager::CellButtonClicked(int RowNum)
 
 void AudioManager::updateBar(qint64 current, qint64 total)
 {
-   ui->progressBar->setMaximum(((int)total)/10);
-   ui->progressBar->setValue(((int)current)/10);
+   ui->progressBar->setMaximum(total);
+   ui->progressBar->setValue(current);
 }

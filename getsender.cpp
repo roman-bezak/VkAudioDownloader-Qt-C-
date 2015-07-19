@@ -13,7 +13,9 @@ QByteArray GetSender::sendGetRequest(QString url)
     eventLoop.exec();
 
     QByteArray answer = reply->readAll();
+
     reply->deleteLater();
+    delete manager;
 
     return answer;
 }

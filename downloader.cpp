@@ -3,7 +3,7 @@
 
 QByteArray Downloader::Do_Download(QString url)
 {
-    manager = new QNetworkAccessManager();//создаем объект класса для работы с http
+    QNetworkAccessManager* manager = new QNetworkAccessManager();//создаем объект класса для работы с http
     QNetworkReply* reply = manager->get(QNetworkRequest(QUrl(url)));//выполняем гет запрос и записываем ответ
 
 
@@ -19,7 +19,7 @@ QByteArray Downloader::Do_Download(QString url)
     QByteArray answer = reply->readAll();
 
     reply->deleteLater();
-    //delete manager;
+    delete manager;
 
     return answer;
 }
@@ -42,7 +42,6 @@ void Downloader::saveFile(QString filename,QByteArray content)
 
 void Downloader::showDownloadSize(qint64 current, qint64 total)
 {
-    //qDebug() <<current<<total;
     emit progressDownloader(current,total);
 }
 

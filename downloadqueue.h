@@ -3,6 +3,13 @@
 
 #include <QMainWindow>
 #include <QStringList>
+#include <QSignalMapper>
+#include <QDebug>
+#include <QPushButton>
+#include <QThread>
+#include "downloadthread.h"
+
+
 
 
 namespace Ui {
@@ -17,14 +24,26 @@ private:
 
     QStringList headerHorizNames;
 
+
 public:
+
+
     explicit DownloadQueue(QWidget *parent = 0);
     ~DownloadQueue();
 
 
+    //QList<int> downloadTrackList;
     Ui::DownloadQueue *ui;
+    QSignalMapper *mapper;
+    DownloadThread *downloadthread;
 
-    void insertAudioRowForDownload(QString artist, QString title);
+    void insertAudioRowForDownload(QString artist, QString title, int id);
+
+
+public slots:
+
+    void removeAudioRow(QString id);
+
 };
 
 #endif // DOWNLOADQUEUE_H

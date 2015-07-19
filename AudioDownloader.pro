@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     audiomanager.cpp \
     json.cpp \
     track.cpp \
-    downloadqueue.cpp
+    downloadqueue.cpp \
+    downloadthread.cpp
 
 HEADERS  += mainwindow.h \
     downloader.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     audiomanager.h \
     json.h \
     track.h \
-    downloadqueue.h
+    downloadqueue.h \
+    downloadthread.h
 
 FORMS    += mainwindow.ui \
     audiomanager.ui \

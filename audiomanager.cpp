@@ -2,7 +2,7 @@
 #include "ui_audiomanager.h"
 #include <QPushButton>
 #include <QSignalMapper>
-#include <QDebug>
+
 #include "ui_audiomanager.h"
 #include "downloader.h"
 #include "ui_downloadqueue.h"
@@ -20,31 +20,8 @@ AudioManager::AudioManager(QWidget *parent):
     downloader = new Downloader();
     downloadqueue = new DownloadQueue();
 
-
     downloadqueue->show();
 
-
-
-
-
-//    QPushButton *pButton = new QPushButton("Download",ui->tableWidget);
-//    pList.push_back(pButton);
-//    pList.push_back(pButton);
-
-//    ui->tableWidget->setCellWidget(0,4,pButton);
-
-//    connect(pButton, SIGNAL(clicked()), mapper, SLOT(map()));
-//    mapper->setMapping(pButton, 0);
-//    connect(mapper, SIGNAL(mapped(int)), this, SLOT(CellButtonClicked(int)));
-
-
-//    QSpinBox* sp;
-//     sp = (QSpinBox*)ui->tblScores->cellWidget(srow,j);
-//    ui->tableWidget->cellWidget()
-
-//    //ui->tableWidget->setStyleSheet("QTableView {selection-background-color: red;}");
-
-   // ui->tableWidget->setIsetItem(0, 1, new QTableWidgetItem("Hello"));
 
 
 }
@@ -79,9 +56,10 @@ void AudioManager::initTable()
 
 void AudioManager::audioRowButtonClicked(int RowNum)
 {
-
+    ui->tableWidget->removeRow(5);
     downloadqueue->insertAudioRowForDownload(audioList[RowNum].getArtist(),
-                                             audioList[RowNum].getTitle());
+                                             audioList[RowNum].getTitle(),
+                                             audioList[RowNum].getId());
 
     qDebug() << "START_DOWNLOAD";
 

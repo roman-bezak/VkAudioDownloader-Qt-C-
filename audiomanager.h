@@ -9,9 +9,10 @@
 #include <QMenuBar>
 #include <QStringList>
 #include <QSignalMapper>
+#include <QDebug>
 #include "downloader.h"
 #include "downloadqueue.h"
-
+#include "downloadthread.h"
 #include "track.h"
 
 

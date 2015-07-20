@@ -20,7 +20,7 @@ public:
     ~MainWindow();
 
     OAuth *oauth;
-    Downloader *downloader;
+
 
     void showStartPage();
 

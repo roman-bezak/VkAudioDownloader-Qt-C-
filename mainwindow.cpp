@@ -26,13 +26,17 @@ MainWindow::MainWindow(QWidget *parent):
 
     oauth = new OAuth();
     oauth->audioManager->show();
-    downloader = new Downloader();
+    //downloader = new Downloader();
 
 
     this->showStartPage();
 
     QObject::connect(ui->webView,SIGNAL(urlChanged(QUrl)),oauth,SLOT(check_URL(QUrl)));//изменение урла страницы сохранит токен в oauth.token
     QObject::connect(this->oauth,SIGNAL(oauthSuccess()),this,SLOT(afterSuccessOaouth()));
+
+//    QObject::connect(oauth->audioManager,SIGNAL(sendTrackListToDownloadThread(QList<Track>)),
+//            oauth->audioManager->downloadqueue->downloadthread,
+//            SLOT(updateTrackList(QList<Track>)));
 
 }
 
@@ -51,6 +55,9 @@ void MainWindow::afterSuccessOaouth()
 
 
     this->oauth->requestManager->audioGet(oauth->getUserId(),oauth->getToken(),oauth->audioManager->getAudioCount(),oauth->audioManager->audioList);
+
+
+
     //this->hide();
     oauth->audioManager->initTable();
     oauth->audioManager->show();
@@ -117,9 +124,8 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    oauth->audioManager->showTraksInfo();
 
-    qDebug()<<this->size();
+    oauth->audioManager->downloadqueue->downloaderInThread->showSIZE();
 }
 
 

@@ -1,7 +1,9 @@
 #include "downloader.h"
 
 
-QByteArray Downloader::Do_Download(QString url)
+Downloader::Downloader(QObject *parent) : QObject(parent){}
+
+QByteArray Downloader::doDownload(QString url,QString artist,QString title)
 {
 
     QNetworkAccessManager* manager = new QNetworkAccessManager();//создаем объект класса для работы с http
@@ -18,10 +20,13 @@ QByteArray Downloader::Do_Download(QString url)
     eventLoop.exec();
 
     QByteArray answer = reply->readAll();
-
     reply->deleteLater();
 
     delete manager;
+
+
+    this->saveFile(artist+"-"+title, answer);
+
     return answer;
 }
 
@@ -39,12 +44,48 @@ void Downloader::saveFile(QString filename,QByteArray content)
 
 }
 
+void Downloader::downloadLoop()
+{
+    while(true)
+    {
+        //qDebug()<<"ids size: " << taksIdList.size();
+        if(taksIdList.isEmpty() == false)
+        {
+            //qDebug() << taksIdList.first();
+            qDebug() << this->audioList.size();
+
+            for(int i=0; i < audioList.size(); i++)
+            {
+                if(audioList[i].getId() == taksIdList.first())
+                {
+                    qDebug()<<"In downloader";
+
+                    this->doDownload(audioList[i].getUrl(),
+                                     audioList[i].getArtist(),
+                                     audioList[i].getTitle());
+
+                    //will be send signal for romove row with be downloaded tack
+
+                }
+            }
+        }
+
+
+        QThread::msleep(1100);
+
+    }
+}
+
+
+
 
 
 void Downloader::showDownloadSize(qint64 current, qint64 total)
 {
     emit progressDownloader(current,total);
 }
+
+
 
 
 

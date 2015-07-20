@@ -20,8 +20,15 @@ DownloadQueue::DownloadQueue(QWidget *parent) :
 
     connect(mapper, SIGNAL(mapped(QString)), this, SLOT(removeAudioRow(QString)));
 
-    downloadthread = new DownloadThread();
-    downloadthread->start();
+    downloaderInThread = new Downloader();
+    threadForDownloader = new QThread();
+
+    downloaderInThread->moveToThread(threadForDownloader);
+
+    connect(threadForDownloader,SIGNAL(started()),
+            downloaderInThread,SLOT(downloadLoop()));
+
+    threadForDownloader->start();
 
 }
 
@@ -33,7 +40,7 @@ DownloadQueue::~DownloadQueue()
 void DownloadQueue::insertAudioRowForDownload(QString artist, QString title,int id)
 {
 
-    downloadthread->downloadTrackList.push_back(id);
+    downloaderInThread->taksIdList.push_back(id);
 
     ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
 
@@ -62,7 +69,7 @@ void DownloadQueue::removeAudioRow(QString id)
 {
 
 
-    downloadthread->downloadTrackList.removeOne(id.toInt());
+    downloaderInThread->taksIdList.removeOne(id.toInt());
 
     for(int i=0; i < ui->tableWidget->rowCount(); i++)
         if( ui->tableWidget->item(i,2)->text() == id )

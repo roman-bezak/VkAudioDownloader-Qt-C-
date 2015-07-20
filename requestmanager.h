@@ -7,6 +7,9 @@
 
 class RequestManager:public QObject
 {
+
+
+
 public:
     explicit RequestManager(QObject* parent = 0 ) : QObject(parent){
 
@@ -14,10 +17,12 @@ public:
 
     }
 
-    void audioGet(QString, QString, int, QList<Track> &);
+    void audioGet(QString, QString, int, QList<Track>&);
     int audioCount(QString, QString);
 
     GetSender *getSender;
+
+
 };
 
 #endif // REQUESTMANAGER_H

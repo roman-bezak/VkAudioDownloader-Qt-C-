@@ -12,8 +12,8 @@
 #include <QDebug>
 #include "downloader.h"
 #include "downloadqueue.h"
-#include "downloadthread.h"
 #include "track.h"
+#include "traksrepository.h"
 
 
 namespace Ui {
@@ -22,7 +22,7 @@ class AudioManager;
 
 
 
-class AudioManager:public QMainWindow
+class AudioManager:public QMainWindow, public TraksRepository
 {
     Q_OBJECT
 
@@ -38,28 +38,16 @@ class AudioManager:public QMainWindow
 
         QSignalMapper *mapper;
         QStringList headerHorizNames;
-        QList<Track> audioList;
 
+
+        QThread* thread;
         DownloadQueue *downloadqueue;
-        Downloader *downloader;
+
 
         void setAudioCount(int count){audioCount = count;}
         int getAudioCount(){return audioCount;}
 
 
-        void showTraksInfo()
-        {
-            for(int i = 0;i<audioList.size();i++)
-            {
-                qDebug() <<audioList[i].getTitle();
-                qDebug() <<audioList[i].getArtist();
-                qDebug() <<audioList[i].getUrl();
-                qDebug() <<audioList[i].getDuration();
-                qDebug() <<audioList[i].getStyle();
-                qDebug() <<audioList[i].getId();
-            }
-
-        }
         void initTable();
 
         Ui::AudioManager *ui;
@@ -68,6 +56,7 @@ public slots:
 
         void audioRowButtonClicked(int RowNum);
         void updateBar(qint64,qint64);
+
 
 };
 

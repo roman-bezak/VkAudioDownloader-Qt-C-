@@ -18,6 +18,8 @@ class OAuth: public QObject
 
         audioManager = new AudioManager();
         requestManager = new RequestManager();
+
+
     }
 
 

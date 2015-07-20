@@ -15,6 +15,7 @@ QByteArray GetSender::sendGetRequest(QString url)
     QByteArray answer = reply->readAll();
 
     reply->deleteLater();
+
     delete manager;
 
     return answer;

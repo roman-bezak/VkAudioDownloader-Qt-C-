@@ -7,7 +7,8 @@
 #include <QDebug>
 #include <QPushButton>
 #include <QThread>
-#include "downloadthread.h"
+#include "downloader.h"
+
 
 
 
@@ -32,10 +33,11 @@ public:
     ~DownloadQueue();
 
 
-    //QList<int> downloadTrackList;
     Ui::DownloadQueue *ui;
     QSignalMapper *mapper;
-    DownloadThread *downloadthread;
+
+    Downloader *downloaderInThread;
+    QThread *threadForDownloader;
 
     void insertAudioRowForDownload(QString artist, QString title, int id);
 

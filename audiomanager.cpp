@@ -2,7 +2,6 @@
 #include "ui_audiomanager.h"
 #include <QPushButton>
 #include <QSignalMapper>
-
 #include "ui_audiomanager.h"
 #include "downloader.h"
 #include "ui_downloadqueue.h"
@@ -17,10 +16,11 @@ AudioManager::AudioManager(QWidget *parent):
     ui->setupUi(this);
 
     mapper = new QSignalMapper(this);
-    downloader = new Downloader();
+
     downloadqueue = new DownloadQueue();
 
     downloadqueue->show();
+
 
 
 
@@ -56,22 +56,10 @@ void AudioManager::initTable()
 
 void AudioManager::audioRowButtonClicked(int RowNum)
 {
-    ui->tableWidget->removeRow(5);
+
     downloadqueue->insertAudioRowForDownload(audioList[RowNum].getArtist(),
                                              audioList[RowNum].getTitle(),
                                              audioList[RowNum].getId());
-
-    qDebug() << "START_DOWNLOAD";
-
-
-    connect(downloader,SIGNAL(progressDownloader(qint64,qint64)),this,SLOT(updateBar(qint64,qint64)));
-
-    QByteArray answer = downloader->Do_Download(audioList[RowNum].getUrl());
-
-    downloader->saveFile(audioList[RowNum].getTitle(),answer);
-
-    qDebug() << "EndDownloadAndSaveFile: "+audioList[RowNum].getTitle()+"\n\n";
-
 
 }
 

@@ -7,6 +7,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include "oauth.h"
 #include "track.h"
 
 using namespace QtJson;
@@ -35,8 +36,7 @@ void RequestManager::audioGet(QString id, QString token, int count, QList<Track>
         audioList.push_back(tempTemplateTrack);
      }
 
-
-
+ emit TrackListBeLoaded();
 
 }
 

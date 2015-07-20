@@ -19,7 +19,8 @@ class OAuth: public QObject
         audioManager = new AudioManager();
         requestManager = new RequestManager();
 
-
+        connect(requestManager,SIGNAL(TrackListBeLoaded()),
+                this,SLOT(sendTrackListToDownloader()));
     }
 
 
@@ -28,6 +29,9 @@ class OAuth: public QObject
 
         RequestManager *requestManager;
         AudioManager *audioManager;
+
+
+
 
     private:
 
@@ -41,6 +45,7 @@ class OAuth: public QObject
     public slots:
 
         void check_URL(QUrl url);
+        void sendTrackListToDownloader();
 
     signals:
         void oauthSuccess();

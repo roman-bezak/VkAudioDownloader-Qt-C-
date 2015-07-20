@@ -9,8 +9,10 @@ class RequestManager:public QObject
 {
 
 
+Q_OBJECT
 
 public:
+
     explicit RequestManager(QObject* parent = 0 ) : QObject(parent){
 
         getSender = new GetSender();
@@ -21,6 +23,10 @@ public:
     int audioCount(QString, QString);
 
     GetSender *getSender;
+
+signals:
+
+    void TrackListBeLoaded();
 
 
 };

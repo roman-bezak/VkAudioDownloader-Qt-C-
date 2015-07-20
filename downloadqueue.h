@@ -43,7 +43,7 @@ public:
 
 
 public slots:
-
+    void updateFirstProgressBar(qint64 current, qint64 total);
     void removeAudioRow(QString id);
 
 };

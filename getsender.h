@@ -11,6 +11,7 @@ class GetSender:public QObject
     Q_OBJECT
 
 public:
+
     explicit GetSender(QObject* parent = 0 ) : QObject(parent){}
     QByteArray sendGetRequest(QString);
 };

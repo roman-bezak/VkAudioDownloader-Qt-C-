@@ -40,8 +40,10 @@ public slots:
 
         void showDownloadSize(qint64,qint64);
 
+
 signals:
         void progressDownloader(qint64,qint64);
+        void endDownloadWantRemoveRow(QString id);
 
 
 };

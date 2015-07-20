@@ -48,24 +48,24 @@ void Downloader::downloadLoop()
 {
     while(true)
     {
-        //qDebug()<<"ids size: " << taksIdList.size();
         if(taksIdList.isEmpty() == false)
         {
-            //qDebug() << taksIdList.first();
-            qDebug() << this->audioList.size();
 
             for(int i=0; i < audioList.size(); i++)
             {
-                if(audioList[i].getId() == taksIdList.first())
-                {
-                    qDebug()<<"In downloader";
+                if(taksIdList.isEmpty() == false)
+                    if(audioList[i].getId() == taksIdList.first())
+                    {
+                        qDebug()<<"In downloader";
 
-                    this->doDownload(audioList[i].getUrl(),
+                        this->doDownload(audioList[i].getUrl(),
                                      audioList[i].getArtist(),
                                      audioList[i].getTitle());
 
-                    //will be send signal for romove row with be downloaded tack
 
+                        emit endDownloadWantRemoveRow(QString::number(taksIdList.first()));
+                        //taksIdList.removeFirst();
+                        break;
                 }
             }
         }

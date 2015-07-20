@@ -29,3 +29,8 @@ QString OAuth::getUserId()
 {
     return this->user_id;
 }
+
+void OAuth::sendTrackListToDownloader()
+{
+    audioManager->downloadqueue->downloaderInThread->audioList = audioManager->audioList;
+}

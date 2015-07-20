@@ -28,6 +28,13 @@ DownloadQueue::DownloadQueue(QWidget *parent) :
     connect(threadForDownloader,SIGNAL(started()),
             downloaderInThread,SLOT(downloadLoop()));
 
+
+    connect(downloaderInThread,SIGNAL(endDownloadWantRemoveRow(QString)),
+            this,SLOT(removeAudioRow(QString)));
+
+    connect(downloaderInThread,SIGNAL(progressDownloader(qint64,qint64)),
+            this,SLOT(updateFirstProgressBar(qint64,qint64)));
+
     threadForDownloader->start();
 
 }
@@ -62,6 +69,12 @@ void DownloadQueue::insertAudioRowForDownload(QString artist, QString title,int 
 
 
 
+}
+
+void DownloadQueue::updateFirstProgressBar(qint64 current, qint64 total)
+{
+    this->ui->progressBar->setMaximum((int)total);
+    this->ui->progressBar->setValue((int)current);
 }
 
 

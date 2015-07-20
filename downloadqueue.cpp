@@ -66,7 +66,7 @@ void DownloadQueue::insertAudioRowForDownload(QString artist, QString title,int 
     mapper->setMapping(pButton, QString::number(id));
 
     ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1, 3, pButton);
-
+    //ui->tableWidget->cellWidget(1,1)->hide();
 
 
 }

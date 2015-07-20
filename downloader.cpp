@@ -54,24 +54,29 @@ void Downloader::downloadLoop()
             for(int i=0; i < audioList.size(); i++)
             {
                 if(taksIdList.isEmpty() == false)
-                    if(audioList[i].getId() == taksIdList.first())
-                    {
-                        qDebug()<<"In downloader";
+                   {
 
-                        this->doDownload(audioList[i].getUrl(),
+                        if(audioList[i].getId() == taksIdList.first())
+                        {
+                            qDebug()<<"In downloader";
+
+                            this->doDownload(audioList[i].getUrl(),
                                      audioList[i].getArtist(),
                                      audioList[i].getTitle());
 
+                            if(audioList[i].getId() == taksIdList.first())
+                                emit endDownloadWantRemoveRow(QString::number(taksIdList.first()));
 
-                        emit endDownloadWantRemoveRow(QString::number(taksIdList.first()));
-                        //taksIdList.removeFirst();
-                        break;
-                }
+                            break;
+                        }
+
+                }else break;
+
             }
         }
 
 
-        QThread::msleep(1100);
+        QThread::msleep(1000);
 
     }
 }

@@ -23,25 +23,21 @@ class Downloader:public QObject, public TraksRepository
 
         QList<int> taksIdList;
 
+
         QByteArray doDownload(QString url, QString artist, QString title);
         void saveFile(QString filename,QByteArray content);
-
         void showSIZE()
         {
             qDebug()<<"SIZE: " << audioList.size();
-
-
         }
+
 public slots:
 
         void downloadLoop();
-
-
-
         void showDownloadSize(qint64,qint64);
 
-
 signals:
+
         void progressDownloader(qint64,qint64);
         void endDownloadWantRemoveRow(QString id);
 

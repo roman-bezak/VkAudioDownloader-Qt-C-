@@ -47,26 +47,29 @@ DownloadQueue::~DownloadQueue()
 void DownloadQueue::insertAudioRowForDownload(QString artist, QString title,int id)
 {
 
-    downloaderInThread->taksIdList.push_back(id);
+    if(downloaderInThread->taksIdList.contains(id) == false)//в очереди нет дубликата
+    {
+        downloaderInThread->taksIdList.push_back(id);
 
-    ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+        ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
 
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,
+        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,
                              0, new QTableWidgetItem(artist));
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,
+        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,
                              1, new QTableWidgetItem(title));
-    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,
+        ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,
                              2, new QTableWidgetItem(QString::number(id)));
 
 
-    QPushButton *pButton = new QPushButton("Удалить из очереди",ui->tableWidget);
+        QPushButton *pButton = new QPushButton("Удалить из очереди",ui->tableWidget);
 
-    connect(pButton, SIGNAL(clicked()), mapper, SLOT(map()));
+        connect(pButton, SIGNAL(clicked()), mapper, SLOT(map()));
 
-    mapper->setMapping(pButton, QString::number(id));
+        mapper->setMapping(pButton, QString::number(id));
 
-    ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1, 3, pButton);
-    //ui->tableWidget->cellWidget(1,1)->hide();
+        ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1, 3, pButton);
+
+    }
 
 
 }
@@ -86,8 +89,10 @@ void DownloadQueue::removeAudioRow(QString id)
 
     for(int i=0; i < ui->tableWidget->rowCount(); i++)
         if( ui->tableWidget->item(i,2)->text() == id )
+        {
             ui->tableWidget->removeRow(i);
-
+            break;
+        }
 }
 
 

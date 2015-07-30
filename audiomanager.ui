@@ -15,6 +15,15 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item row="1" column="0">
      <widget class="QTableWidget" name="tableWidget">
       <property name="editTriggers">
@@ -25,13 +34,6 @@
       </property>
       <property name="cornerButtonEnabled">
        <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QProgressBar" name="progressBar">
-      <property name="value">
-       <number>0</number>
       </property>
      </widget>
     </item>
@@ -65,9 +67,9 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionAction228"/>
    <addaction name="action123"/>
    <addaction name="separator"/>
-   <addaction name="actionAction228"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action123">

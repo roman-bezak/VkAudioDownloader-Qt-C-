@@ -38,16 +38,11 @@ class AudioManager:public QMainWindow, public TraksRepository
 
         QSignalMapper *mapper;
         QStringList headerHorizNames;
-
-
         QThread* thread;
         DownloadQueue *downloadqueue;
 
-
         void setAudioCount(int count){audioCount = count;}
         int getAudioCount(){return audioCount;}
-
-
         void initTable();
 
         Ui::AudioManager *ui;
@@ -55,7 +50,7 @@ class AudioManager:public QMainWindow, public TraksRepository
 public slots:
 
         void audioRowButtonClicked(int RowNum);
-        void updateBar(qint64,qint64);
+
 
 
 };

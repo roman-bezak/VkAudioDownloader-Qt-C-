@@ -4,6 +4,7 @@
 #include <QSignalMapper>
 #include <QCheckBox>
 #include <QTableWidgetItem>
+#include <QHBoxLayout>
 #include "ui_audiomanager.h"
 #include "downloader.h"
 #include "ui_downloadqueue.h"
@@ -37,10 +38,10 @@ void AudioManager::initTable()
 {
 
 
-    ui->tableWidget->setColumnCount(5);                 //id,title,artist,duration
+    ui->tableWidget->setColumnCount(6);                 //id,title,artist,duration
     ui->tableWidget->setRowCount(audioList.size());
 
-    headerHorizNames<<"Artist"<<"Title"<<"Duration"<<"Sound ID"<<" ";
+    headerHorizNames<<""<<"Artist"<<"Title"<<"Duration"<<"Sound ID"<<" ";
     ui->tableWidget->setHorizontalHeaderLabels(headerHorizNames);
 
 
@@ -50,14 +51,11 @@ void AudioManager::initTable()
         QPushButton *pButton = new QPushButton("Download",ui->tableWidget);
         connect(pButton, SIGNAL(clicked()), mapper, SLOT(map()));
         mapper->setMapping(pButton, i);
-        ui->tableWidget->setCellWidget(i,4,pButton);
+        ui->tableWidget->setCellWidget(i,5,pButton);
 
     }
 
 
-
-    QCheckBox *box = new QCheckBox();        
-    ui->tableWidget->setCellWidget(0,0,box);
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(audioRowButtonClicked(int)));
 
 

@@ -99,10 +99,10 @@ void MainWindow::on_pushButton_clicked()
 
            for(int i = 0; i < this->oauth->audioManager->audioList.size(); i++)
                {
-                  oauth->audioManager->ui->tableWidget->setItem(i, 0, new QTableWidgetItem("      "+this->oauth->audioManager->audioList[i].getArtist()));
-                  oauth->audioManager->ui->tableWidget->setItem(i, 1, new QTableWidgetItem(this->oauth->audioManager->audioList[i].getTitle()));
-                  oauth->audioManager->ui->tableWidget->setItem(i, 2, new QTableWidgetItem(QString::number(this->oauth->audioManager->audioList[i].getDuration())));
-                  oauth->audioManager->ui->tableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(this->oauth->audioManager->audioList[i].getId())));
+                  oauth->audioManager->ui->tableWidget->setItem(i, 1, new QTableWidgetItem("      "+this->oauth->audioManager->audioList[i].getArtist()));
+                  oauth->audioManager->ui->tableWidget->setItem(i, 2, new QTableWidgetItem(this->oauth->audioManager->audioList[i].getTitle()));
+                  oauth->audioManager->ui->tableWidget->setItem(i, 3, new QTableWidgetItem(QString::number(this->oauth->audioManager->audioList[i].getDuration())));
+                  oauth->audioManager->ui->tableWidget->setItem(i, 4, new QTableWidgetItem(QString::number(this->oauth->audioManager->audioList[i].getId())));
                }
 
 
